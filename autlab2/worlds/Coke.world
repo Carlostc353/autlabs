@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="empty_world_with_coke">
+
+    <!-- Configuración básica del mundo -->
+    <gravity>0 0 -9.8</gravity>
+
+    <!-- Luz ambiental y del sol -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Lata de Coca-Cola en el centro del mundo -->
+    <include>
+      <uri>model://coke_can</uri>
+      <name>coke_can</name>
+      <pose>0 0 0 0 0 0</pose> <!-- Al centro, sin rotación -->
+    </include>
+
+  </world>
+</sdf>

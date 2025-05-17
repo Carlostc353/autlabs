@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Parámetros de los modelos -->
+  <arg name="model_file" default="$(find autlab2)/urdf/cambot.urdf" />
+
+  <!-- Incluir el mundo con la lata al centro -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find autlab2)/worlds/Coke.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- CAMBOT 1 -->
+  <group ns="cambot_1">
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model_file)" />
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="tf_prefix" value="cambot_1" />
+    </node>
+    <node name="spawn_1" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model cambot_1 -x 1.0 -y 0.0 -z 0.0 -Y 3.1416 -param robot_description"
+      output="screen"/>
+  </group>
+
+  <!-- CAMBOT 2 -->
+  <group ns="cambot_2">
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model_file)" />
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="tf_prefix" value="cambot_2" />
+    </node>
+    <node name="spawn_2" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model cambot_2 -x -0.5 -y 0.866 -z 0.0 -Y -1.0472 -param robot_description"
+      output="screen"/>
+  </group>
+
+  <!-- CAMBOT 3 -->
+  <group ns="cambot_3">
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model_file)" />
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="tf_prefix" value="cambot_3" />
+    </node>
+    <node name="spawn_3" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model cambot_3 -x -0.5 -y -0.866 -z 0.0 -Y 1.0472 -param robot_description"
+      output="screen"/>
+  </group>
+
+</launch>
